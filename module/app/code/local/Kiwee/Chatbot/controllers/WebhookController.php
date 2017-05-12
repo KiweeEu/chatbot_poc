@@ -11,8 +11,9 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 		error_log(var_export($request, true));
 		error_log($intent);
 
-		switch($action) {
+		switch ($action) {
 			case 'product.list':
+
 
 				// Select latest inserted Products
 				$productCollection = Mage::getModel('catalog/product')->getCollection()
@@ -25,13 +26,30 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 					->setPageSize(5)
 					->setCurPage(1);
 
+				if (isset($request['result']['parameters']['product-type'])) {
+
+					// Filter by category
+					$category = $request['result']['parameters']['product-type'];
+
+					switch ($category) {
+						case 'shoes':
+							$categoryId = 20;
+							break;
+						case 'eyewear':
+							$categoryId = 18;
+							break;
+					}
+					$productCollection->addAttributeToFilter('category_id', array('in' => $categoryId));
+				}
+
+
 				$elements = array();
-				foreach($productCollection as $product) {
+				foreach ($productCollection as $product) {
 					$productData = array(
 						"title" => $product->getName(),
 						"image_url" => $product->getImageUrl(),
-						"subtitle" => '€ '. number_format($product->getFinalPrice(), 2),
-						"buttons"=> array(
+						"subtitle" => '€ ' . number_format($product->getFinalPrice(), 2),
+						"buttons" => array(
 							array(
 								"type" => "web_url",
 								"url" => $product->getProductUrl(),
@@ -63,7 +81,6 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 						)
 					)
 				);
-
 
 
 				break;
@@ -135,8 +152,6 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 		}
 
 //		$response = Mage::helper('core')->jsonEncode($response);
-
-
 
 
 		$response = Mage::helper('core')->jsonEncode($response);
