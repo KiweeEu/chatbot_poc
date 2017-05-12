@@ -11,9 +11,6 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 		error_log(var_export($request, true));
 		error_log($intent);
 
-		$store = Mage::app()->getStore();
-
-		$intent = 'products-intent';
 		switch($intent) {
 			case 'products-intent':
 
@@ -68,6 +65,32 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 				);
 
 
+
+				break;
+
+			default:
+
+				$response = array(
+					"speech" => "Here the products you requested:",
+					"displayText" => "Here the products you requested:",
+					"data" => array(
+						"facebook" => array(
+							"text" => "Pick a color:",
+							"quick_replies" => array(
+								array(
+									"content_type" => "text",
+									"title" => "Red",
+									"payload" => "rosso"
+								),
+								array(
+									"content_type" => "text",
+									"title" => "Green",
+									"payload" => "verde"
+								)
+							)
+						)
+					)
+				);
 
 				break;
 		}
