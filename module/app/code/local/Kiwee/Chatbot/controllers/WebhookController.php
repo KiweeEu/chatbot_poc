@@ -11,7 +11,6 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 		error_log(var_export($request, true));
 		error_log($intent);
 
-		$action = 'product.list';
 		switch ($action) {
 			case 'product.list':
 
@@ -26,10 +25,6 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 					->addAttributeToSort('created_at', 'desc')
 					->setPageSize(5)
 					->setCurPage(1);
-
-
-
-
 
 				if (isset($request['result']['parameters']['product-type'])) {
 
