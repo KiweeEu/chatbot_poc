@@ -11,6 +11,8 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 		error_log(var_export($request, true));
 		error_log($intent);
 
+		$store = Mage::app()->getStore();
+
 		$intent = 'products-intent';
 		switch($intent) {
 			case 'products-intent':
@@ -31,7 +33,7 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 					$productData = array(
 						"title" => $product->getName(),
 						"image_url" => $product->getImageUrl(),
-						"subtitle" => $product->getFinalPrice(),
+						"subtitle" => '€ '. number_format($product->getFinalPrice(), 2),
 						"buttons"=> array(
 							array(
 								"type" => "web_url",
