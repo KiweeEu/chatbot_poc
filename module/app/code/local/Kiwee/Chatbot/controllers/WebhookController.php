@@ -7,12 +7,12 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 		$inputJson = file_get_contents('php://input');
 		$request = Mage::helper('core')->jsonDecode($inputJson);
 		$intent = $request['result']['metadata']['intentName'];
-
+		$action = $request['result']['action'];
 		error_log(var_export($request, true));
 		error_log($intent);
 
-		switch($intent) {
-			case 'products-intent':
+		switch($action) {
+			case 'product.list':
 
 				// Select latest inserted Products
 				$productCollection = Mage::getModel('catalog/product')->getCollection()
@@ -53,6 +53,7 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 					"displayText" => "Here the products you requested:",
 					"data" => array(
 						"facebook" => array(
+							"text" => "Here the products you requested:",
 							"attachment" => array(
 								"type" => "template",
 								"payload" => array(
@@ -71,21 +72,21 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 			default:
 
 				$response = array(
-					"speech" => "Here the products you requested:",
-					"displayText" => "Here the products you requested:",
+					"speech" => "I am sorry, I didn't understand. How else can I help you?",
+					"displayText" => "I am sorry, I didn't understand. How else can I help you?",
 					"data" => array(
 						"facebook" => array(
-							"text" => "Pick a color:",
+							"text" => "I am sorry, I didn't understand. How else can I help you?",
 							"quick_replies" => array(
 								array(
 									"content_type" => "text",
-									"title" => "Red",
-									"payload" => "rosso"
+									"title" => "What's new?",
+									"payload" => "product.list"
 								),
 								array(
 									"content_type" => "text",
-									"title" => "Green",
-									"payload" => "verde"
+									"title" => "I need help",
+									"payload" => "support"
 								)
 							)
 						)
