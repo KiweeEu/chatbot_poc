@@ -11,6 +11,7 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 		error_log(var_export($request, true));
 		error_log($intent);
 
+		$action = 'product.list';
 		switch ($action) {
 			case 'product.list':
 
@@ -26,7 +27,10 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 					->setPageSize(5)
 					->setCurPage(1);
 
-				/*
+
+
+
+
 				if (isset($request['result']['parameters']['product-type'])) {
 
 					// Filter by category
@@ -40,9 +44,11 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 							$categoryId = 18;
 							break;
 					}
-					$productCollection->addAttributeToFilter('category_id', array('in' => $categoryId));
+					$category_model = Mage::getModel('catalog/category');
+					$category = $category_model->load($categoryId);
+					$category->setIsAnchor(true);
+					$productCollection->addCategoryFilter($category);
 				}
-				*/
 
 
 				$elements = array();
