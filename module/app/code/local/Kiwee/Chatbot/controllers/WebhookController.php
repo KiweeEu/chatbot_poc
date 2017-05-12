@@ -77,11 +77,9 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 							"buttons" => array(
 								array(
 									"type" => "web_url",
-									"url" => "https://petersfancyapparel.com/criteria_selector",
+									"url" => "https://vanilla.dev.kiwee.eu/",
 									"title" => "Select Criteria",
-									"webview_height_ratio" => "full",
-									"messenger_extensions" => true,
-									"fallback_url" => "https://petersfancyapparel.com/fallback"
+									"webview_height_ratio" => "full"
 								)
 							)
 						)
