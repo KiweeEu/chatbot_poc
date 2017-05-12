@@ -27,8 +27,6 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 
 				$elements = array();
 				foreach($productCollection as $product) {
-					echo $product->getSku();
-
 					$productData = array(
 						"title" => $product->getName(),
 						"image_url" => $product->getImageUrl(),
@@ -65,6 +63,8 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 						)
 					)
 				);
+
+
 
 				break;
 		}
