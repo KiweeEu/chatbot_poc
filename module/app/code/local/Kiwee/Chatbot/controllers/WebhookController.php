@@ -68,6 +68,28 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 
 				break;
 
+			case 'support.generic':
+				$response = array(
+					"speech" => "Button test",
+					"displayText" => "Button test",
+					"data" => array(
+						"facebook" => array(
+							"buttons" => array(
+								array(
+									"type" => "web_url",
+									"url" => "https://petersfancyapparel.com/criteria_selector",
+									"title" => "Select Criteria",
+									"webview_height_ratio" => "full",
+									"messenger_extensions" => true,
+									"fallback_url" => "https://petersfancyapparel.com/fallback"
+								)
+							)
+						)
+					)
+				);
+
+				break;
+
 			default:
 
 				$response = array(
