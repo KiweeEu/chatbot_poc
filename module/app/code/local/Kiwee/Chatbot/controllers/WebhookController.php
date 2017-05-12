@@ -32,7 +32,7 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 											"buttons"=> array(
 												array(
 													"type" => "web_url",
-													"url" => "https:\/\/vanilla.dev.kiwee.eu\/accessories\/eyewear\/jackie-o-round-sunglasses.html",
+													"url" => "https://vanilla.dev.kiwee.eu/accessories/eyewear/jackie-o-round-sunglasses.html",
 													"title" => "Go to Website"
 												),
 												array(
