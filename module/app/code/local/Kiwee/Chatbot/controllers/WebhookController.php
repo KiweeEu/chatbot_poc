@@ -21,6 +21,7 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 					->addAttributeToFilter('visibility', array(
 						'neq' => Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE))
 					->addFinalPrice()
+					->addUrlRewrite()
 					->addAttributeToSort('created_at', 'desc')
 					->setPageSize(5)
 					->setCurPage(1);
@@ -34,7 +35,7 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 						"buttons"=> array(
 							array(
 								"type" => "web_url",
-								"url" => $product->getUrl(),
+								"url" => $product->getProductUrl(),
 								"title" => "Go to Website"
 							),
 							array(
