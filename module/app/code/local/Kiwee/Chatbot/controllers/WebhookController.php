@@ -15,6 +15,41 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 		switch($intent) {
 			case 'products-intent':
 
+				// Select latest inserted Products
+				$productCollection = Mage::getModel('catalog/product')->getCollection()
+					->addAttributeToSelect('*')
+					->addAttributeToFilter('visibility', array(
+						'neq' => Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE))
+					->addFinalPrice()
+					->addAttributeToSort('created_at', 'desc')
+					->setPageSize(5)
+					->setCurPage(1);
+
+				$elements = array();
+				foreach($productCollection as $product) {
+					echo $product->getSku();
+
+					$productData = array(
+						"title" => $product->getName(),
+						"image_url" => $product->getImageUrl(),
+						"subtitle" => $product->getFinalPrice(),
+						"buttons"=> array(
+							array(
+								"type" => "web_url",
+								"url" => $product->getUrl(),
+								"title" => "Go to Website"
+							),
+							array(
+								"type" => "element_share"
+							)
+						)
+					);
+
+					$elements[] = $productData;
+
+				}
+
+
 				$response = array(
 					"speech" => "Here the products you requested:",
 					"displayText" => "Here the products you requested:",
@@ -24,42 +59,7 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 								"type" => "template",
 								"payload" => array(
 									"template_type" => "generic",
-									"elements" => array(
-										array(
-											"title" => "AVIATOR SUNGLASSES",
-											"image_url" => "https://vanilla.dev.kiwee.eu/media/catalog/product/cache/2/image/9df78eab33525d08d6e5fb8d27136e95/a/c/ace000a_1.jpg",
-											"subtitle" => "In stock",
-											"buttons"=> array(
-												array(
-													"type" => "web_url",
-													"url" => "https://vanilla.dev.kiwee.eu/accessories/eyewear/jackie-o-round-sunglasses.html",
-													"title" => "Go to Website"
-												),
-												array(
-													"type" => "element_share"
-												)
-											)
-//									"default_action" => array(
-//										"type" => "web_url",
-//										"url" => "https://vanilla.dev.kiwee.eu/accessories/eyewear/aviator-sunglasses.html",
-//										"messenger_extensions" => true,
-//										"webview_height_ratio" => "tall",
-//										"fallback_url" => "https://vanilla.dev.kiwee.eu/accessories/eyewear/"
-//									)
-										),
-										array(
-											"title" => "AVIATOR SUNGLASSES",
-											"image_url" => "https://vanilla.dev.kiwee.eu/media/catalog/product/cache/2/image/9df78eab33525d08d6e5fb8d27136e95/a/c/ace000a_1.jpg",
-											"subtitle" => "In stock",
-//									"default_action" => array(
-//										"type" => "web_url",
-//										"url" => "https://vanilla.dev.kiwee.eu/accessories/eyewear/aviator-sunglasses.html",
-//										"messenger_extensions" => true,
-//										"webview_height_ratio" => "tall",
-//										"fallback_url" => "https://vanilla.dev.kiwee.eu/accessories/eyewear/"
-//									)
-										)
-									)
+									"elements" => $elements
 								)
 							)
 						)
