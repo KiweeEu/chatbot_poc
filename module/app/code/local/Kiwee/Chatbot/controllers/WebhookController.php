@@ -7,9 +7,13 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 		$inputJson = file_get_contents('php://input');
 
 		$request = Mage::helper('core')->jsonDecode($inputJson);
+
 		error_log(var_export($request, true));
 
-//		error_log($inputJson);
+		$intent = $request['result']['metadata']['intentName'];
+
+
+		error_log($intent);
 
 		/*
 
