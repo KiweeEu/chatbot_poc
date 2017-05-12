@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Kiwee_Chatbot>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Kiwee_Chatbot>
+    </modules>
+</config>

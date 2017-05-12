@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+    <modules>
+        <Kiwee_Chatbot>
+            <version>0.1.1</version>
+        </Kiwee_Chatbot>
+    </modules>
+    <frontend>
+        <routers>
+            <chatbot>
+                <use>standard</use>
+                <args>
+                    <module>Kiwee_Chatbot</module>
+                    <frontName>chatbot</frontName>
+                </args>
+            </chatbot>
+        </routers>
+    </frontend>
+</config>
