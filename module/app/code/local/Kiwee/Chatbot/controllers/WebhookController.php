@@ -26,6 +26,7 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 					->setPageSize(5)
 					->setCurPage(1);
 
+				/*
 				if (isset($request['result']['parameters']['product-type'])) {
 
 					// Filter by category
@@ -41,6 +42,7 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 					}
 					$productCollection->addAttributeToFilter('category_id', array('in' => $categoryId));
 				}
+				*/
 
 
 				$elements = array();
