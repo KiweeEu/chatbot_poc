@@ -74,12 +74,19 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 					"displayText" => "Button test",
 					"data" => array(
 						"facebook" => array(
-							"buttons" => array(
-								array(
-									"type" => "web_url",
-									"url" => "https://vanilla.dev.kiwee.eu/",
-									"title" => "Select Criteria",
-									"webview_height_ratio" => "full"
+							"attachment" => array(
+								"type" => "template",
+								"payload" => array(
+									"template_type" => "button",
+									"text" => "What do you want to do next?",
+									"buttons" => array(
+										array(
+											"type" => "web_url",
+											"url" => "https://vanilla.dev.kiwee.eu/",
+											"title" => "Select Criteria",
+											"webview_height_ratio" => "full"
+										)
+									)
 								)
 							)
 						)
