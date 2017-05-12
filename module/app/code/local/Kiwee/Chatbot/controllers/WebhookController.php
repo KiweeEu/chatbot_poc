@@ -78,12 +78,24 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 								"type" => "template",
 								"payload" => array(
 									"template_type" => "button",
-									"text" => "What do you want to do next?",
+									"text" => "Let's get in touch!",
 									"buttons" => array(
 										array(
 											"type" => "web_url",
-											"url" => "https://vanilla.dev.kiwee.eu/",
-											"title" => "Select Criteria",
+											"url" => "http://magento1924.dev/sales/guest/form/",
+											"title" => "About my order",
+											"webview_height_ratio" => "full"
+										),
+										array(
+											"type" => "web_url",
+											"url" => "http://magento1924.dev/customer-service/",
+											"title" => "Customer service",
+											"webview_height_ratio" => "full"
+										),
+										array(
+											"type" => "web_url",
+											"url" => "http://magento1924.dev/contacts/",
+											"title" => "Contact us",
 											"webview_height_ratio" => "full"
 										)
 									)
