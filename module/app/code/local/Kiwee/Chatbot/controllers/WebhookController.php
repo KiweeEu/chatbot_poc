@@ -53,7 +53,6 @@ class Kiwee_Chatbot_WebhookController extends Mage_Core_Controller_Front_Action 
 					"displayText" => "Here the products you requested:",
 					"data" => array(
 						"facebook" => array(
-							"text" => "Here the products you requested:",
 							"attachment" => array(
 								"type" => "template",
 								"payload" => array(
